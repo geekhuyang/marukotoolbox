@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mp4box", "mp4box\mp4box.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlExs", "ControlExs\ControlExs.csproj", "{05CC89B6-EF40-490F-A663-228AE6468776}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mp4boxTests", "mp4boxTests\mp4boxTests.csproj", "{F152C15D-64B3-4D16-8CB9-AD88ED53BD43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{05CC89B6-EF40-490F-A663-228AE6468776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05CC89B6-EF40-490F-A663-228AE6468776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05CC89B6-EF40-490F-A663-228AE6468776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F152C15D-64B3-4D16-8CB9-AD88ED53BD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F152C15D-64B3-4D16-8CB9-AD88ED53BD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F152C15D-64B3-4D16-8CB9-AD88ED53BD43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F152C15D-64B3-4D16-8CB9-AD88ED53BD43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

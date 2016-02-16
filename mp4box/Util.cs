@@ -442,14 +442,13 @@ namespace mp4box
                 StringBuilder sb = new StringBuilder();
                 if (!string.IsNullOrWhiteSpace(header))
                 {
-                    sb.Append(header).Append(space);
+                    sb.Append(header);
                 }
                 for (int i = 0; i < parameterItemList.Count; i++)
                 {
+                    if (sb.Length > 0)
+                        sb.Append(space);
                     sb.Append(parameterItemList[i].Build());
-                    //if not the last parameter
-                    if (i != parameterItemList.Count)
-                    { sb.Append(space); }
                 }
                 return sb.ToString();
             }
@@ -486,14 +485,19 @@ namespace mp4box
                 public StringBuilder Build()
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append(name).Append(space);
-                    if (valueQuotation)
+                    sb.Append(name);
+                    if (!string.IsNullOrEmpty(value))
                     {
-                        sb.Append(setQuotation(value));
-                    }
-                    else
-                    {
-                        sb.Append(value);
+                        sb.Append(space);
+
+                        if (valueQuotation)
+                        {
+                            sb.Append(setQuotation(value));
+                        }
+                        else
+                        {
+                            sb.Append(value);
+                        }
                     }
                     return sb;
                 }
