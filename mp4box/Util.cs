@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 
 namespace mp4box
 {
-    class Util
+    public class Util
     {
         /// <summary>
         /// 自动加引号
@@ -397,6 +397,113 @@ namespace mp4box
             IMAGE,
         }
 
+        #endregion
+
+        #region ParameterBuilder
+        public class ParameterBuilder
+        {
+            private const string space = " ";
+
+            //Normally, it should be an executable file. Such as "FFmpeg.exe".
+            //Could be blank.
+            public string header = "";
+
+            //Allow duplicated parameter names. Eg. "-v aa -v bb"
+            public List<ParameterItem> parameterItemList = new List<ParameterItem>();
+
+            /// <summary>
+            /// A new parameter instance
+            /// </summary>
+            public ParameterBuilder()
+            { }
+
+            /// <summary>
+            /// A new parameter instance with Header
+            /// </summary>
+            /// <param name="header"></param>
+            public ParameterBuilder(string header) : this()
+            {
+                this.header = header;
+            }
+
+            //Everything is public, so you could remove the item by yourself.
+            //Here just provide a shortcut to add new parameter.
+            public void Add(ParameterItem item)
+            {
+                parameterItemList.Add(item);
+            }
+
+            /// <summary>
+            /// Generate the paramater string
+            /// </summary>
+            /// <returns></returns>
+            public string Build()
+            {
+                StringBuilder sb = new StringBuilder();
+                if (!string.IsNullOrWhiteSpace(header))
+                {
+                    sb.Append(header).Append(space);
+                }
+                for (int i = 0; i < parameterItemList.Count; i++)
+                {
+                    sb.Append(parameterItemList[i].Build());
+                    //if not the last parameter
+                    if (i != parameterItemList.Count)
+                    { sb.Append(space); }
+                }
+                return sb.ToString();
+            }
+
+            /// <summary>
+            /// Detailed settings for each parameter sets.
+            /// == How to Use ==
+            /// 1. new ParameterItem("--video", "C:\\file.mp4", true)
+            /// 2. Build()
+            /// 3. Output: (native text)
+            /// --video "C:\file.mp4"
+            /// 
+            /// If you want to add custom string, just write everything into "name"
+            /// </summary>
+            public class ParameterItem
+            {
+                public string name = "";
+                public string value = "";
+                public bool valueQuotation = false;
+                public string quotationMark = "\"";
+                private const string space = " ";
+
+                public ParameterItem() { }
+
+                public ParameterItem(string name) : this()
+                { this.name = name; }
+
+                public ParameterItem(string name, string value, bool valueQuation = false) : this(name)
+                {
+                    this.value = value;
+                    this.valueQuotation = valueQuation;
+                }
+
+                public StringBuilder Build()
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(name).Append(space);
+                    if (valueQuotation)
+                    {
+                        sb.Append(setQuotation(value));
+                    }
+                    else
+                    {
+                        sb.Append(value);
+                    }
+                    return sb;
+                }
+
+                private string setQuotation(string content)
+                {
+                    return (quotationMark + content + quotationMark);
+                }
+            }
+        }
         #endregion
     }
 }
