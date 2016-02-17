@@ -433,6 +433,17 @@ namespace mp4box
                 parameterItemList.Add(item);
             }
 
+            public void Add(string name)
+            {
+                parameterItemList.Add(new ParameterItem(name));
+            }
+
+            public void Add(string name, string value, bool valueQuation = false)
+            {
+                parameterItemList.Add(new ParameterItem(name, value, valueQuation));
+            }
+
+
             /// <summary>
             /// Generate the paramater string
             /// </summary>

@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using mp4box.Util;
+using mp4box;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace mp4box.UtilTests
+namespace mp4box.Tests
 {
     [TestClass()]
     public class ParameterBuilderTests
@@ -46,6 +46,30 @@ namespace mp4box.UtilTests
 
             builder = new Util.ParameterBuilder();
             builder.Add(new Util.ParameterBuilder.ParameterItem("-name", "value",true));
+            expected = "-name \"value\"";
+            Assert.AreEqual(expected, builder.Build());
+        }
+
+        [TestMethod()]
+        public void AddTest1()
+        {
+            var builder = new Util.ParameterBuilder();
+            builder.Add("");
+            string expected = "";
+            Assert.AreEqual(expected, builder.Build());
+
+            builder = new Util.ParameterBuilder();
+            builder.Add("--nameOnly");
+            expected = "--nameOnly";
+            Assert.AreEqual(expected, builder.Build());
+
+            builder = new Util.ParameterBuilder();
+            builder.Add("-name", "value");
+            expected = "-name value";
+            Assert.AreEqual(expected, builder.Build());
+
+            builder = new Util.ParameterBuilder();
+            builder.Add("-name", "value", true);
             expected = "-name \"value\"";
             Assert.AreEqual(expected, builder.Build());
         }
